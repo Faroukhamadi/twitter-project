@@ -1,13 +1,82 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.login-container {
+  width: 100%;
+  height: 50%;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.login-text {
+  font-family: 'Roboto';
+  font-weight: 900;
+  font-size: 42px;
+}
+
+.login-email,
+.login-password {
+  width: 450px;
+  height: 70px;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  text-indent: 20px;
+  font-size: larger;
+}
+
+input::placeholder {
+  font-family: 'Segoe UI';
+}
+
+.login-container > img {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.login-button {
+  width: 450px;
+  height: 60px;
+  border-radius: 76px;
+  border: none;
+  cursor: pointer;
+  background: #1da1f2;
+  font-family: 'Segoe UI';
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.login-text-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.login-password-reset,
+.login-signup {
+  font-family: 'Segoe UI';
+  color: #1da1f2;
+  font-weight: 400;
+  cursor: pointer;
 }
