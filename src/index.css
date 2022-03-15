@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -86,4 +86,116 @@ input::placeholder {
 .login-password-reset:hover,
 .login-signup:hover {
   text-decoration: underline;
+}
+
+.home-container {
+  min-height: 100vh;
+  width: 85vw;
+}
+
+/* IMPORTANT: maybe remove this later because it might ruin other components */
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.home-container {
+  /* IMPORTANT: consider removing this later */
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-left-navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.home-tweet-button {
+  background-color: #1da1f2;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 100px;
+  width: 180px;
+  height: 50px;
+  font-family: 'Roboto';
+  color: white;
+  font-weight: 700;
+  border: none;
+  transition: 300ms opacity ease-in-out;
+}
+
+.home-tweet-button:hover {
+  opacity: 0.9;
+}
+
+.home-home-button {
+  width: 180px;
+  height: 50px;
+  border-radius: 100px;
+  background: none;
+  border: none;
+  transition: 300ms background-color ease-in-out;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 5px;
+}
+
+.home-home-button:hover {
+  background-color: #d1e8f8;
+}
+
+.home-twitter-logo {
+  width: 43px;
+  padding: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 300ms background-color ease-in-out;
+}
+
+.home-twitter-logo:hover {
+  background-color: #d1e8f8;
+}
+
+.home-search {
+  font-family: 'Roboto';
+  font-weight: 400;
+  background-image: url('./images/Search.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-position-x: 5px;
+  background-color: #e7ecf0;
+  height: 38px;
+  width: 250px;
+  text-indent: 30px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+}
+
+.home-search:focus,
+.home-posts-search:focus {
+  border: 1px solid #1da1f2;
+}
+
+.home-posts-search {
+  font-family: 'Roboto';
+  font-weight: 400;
+  background-image: url('./images/Search.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-position-x: 5px;
+  background-color: #e7ecf0;
+  height: 38px;
+  width: 400px;
+  text-indent: 30px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+}
+
+.search-bar-container {
 }

@@ -12,8 +12,10 @@ import { auth } from './firebase-config';
 export const UserContext = createContext(null);
 
 const App = () => {
-  const [value, setValue] = useState('hello from context');
+  // IMPORTANT: Might need this later
+  // const [value, setValue] = useState('hello from context');
   const [hasAccount, setHasAccount] = useState(false);
+  const [isWrongPassword, setisWrongPassword] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
@@ -24,7 +26,7 @@ const App = () => {
         setHasAccount(false);
       })
       .catch((error) => {
-        // if user already has an count
+        // if user already has an account
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
           setHasAccount(true);
         }
@@ -36,9 +38,13 @@ const App = () => {
       .then(() => {
         setCurrentUser({ email, password });
         setIsLoggedIn(true);
-        console.log('yayy user is signed in');
+        setisWrongPassword(true);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.message === 'Firebase: Error (auth/wrong-password).') {
+          setisWrongPassword(true);
+        }
+      });
   };
 
   return (
