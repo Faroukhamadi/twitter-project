@@ -13,12 +13,10 @@ body,
   height: 100%;
 }
 
-.login-container {
+.login-container,
+.signup-container {
   width: 100%;
   height: 50%;
-}
-
-.login-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -26,14 +24,18 @@ body,
   margin-top: 5%;
 }
 
-.login-text {
+.login-text,
+.signup-text {
   font-family: 'Roboto';
   font-weight: 900;
   font-size: 42px;
 }
 
 .login-email,
-.login-password {
+.login-password,
+.signup-name,
+.signup-email,
+.signup-password {
   width: 450px;
   height: 70px;
   border-radius: 7px;
@@ -47,13 +49,16 @@ input::placeholder {
   font-family: 'Segoe UI';
 }
 
+/* FIXME: check if this is useful
+   if it's not -> delete it */
 .login-container > img {
   display: flex;
   justify-content: left;
   align-items: left;
 }
 
-.login-button {
+.login-button,
+.signup-button {
   width: 450px;
   height: 60px;
   border-radius: 76px;
