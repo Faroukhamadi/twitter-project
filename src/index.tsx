@@ -5,4 +5,4 @@ import App from './App';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 
-ReactDOM.render(<SignUp />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

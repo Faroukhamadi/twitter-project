@@ -49,14 +49,6 @@ input::placeholder {
   font-family: 'Segoe UI';
 }
 
-/* FIXME: check if this is useful
-   if it's not -> delete it */
-.login-container > img {
-  display: flex;
-  justify-content: left;
-  align-items: left;
-}
-
 .login-button,
 .signup-button {
   width: 450px;
@@ -69,6 +61,11 @@ input::placeholder {
   font-weight: 500;
   font-size: 18px;
   color: #ffffff;
+}
+
+.login-button:hover,
+.signup-button:hover {
+  opacity: 0.9;
 }
 
 .login-text-container {
@@ -84,4 +81,9 @@ input::placeholder {
   color: #1da1f2;
   font-weight: 400;
   cursor: pointer;
+}
+
+.login-password-reset:hover,
+.login-signup:hover {
+  text-decoration: underline;
 }
