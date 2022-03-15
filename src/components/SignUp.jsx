@@ -1,12 +1,14 @@
 import { useRef, useState, useContext } from 'react';
 import twitterLogo from '../images/twitter-logo.png';
 import { UserContext } from '../App';
+import { Alert } from 'react-bootstrap';
 
 const SignUp = (props) => {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const { email, password } = useContext(UserContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     props.signup(emailRef.current.value, passwordRef.current.value);
@@ -37,6 +39,11 @@ const SignUp = (props) => {
       <button className="signup-button" type="submit">
         Sign Up
       </button>
+      {props.hasAccount && (
+        <Alert variant="danger">
+          <Alert.Heading>Account already exists</Alert.Heading>
+        </Alert>
+      )}
     </form>
   );
 };
