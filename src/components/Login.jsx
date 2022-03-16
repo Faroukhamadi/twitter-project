@@ -9,7 +9,7 @@ const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    props.login(emailRef.current.value, passwordRef.current.value);
+    await props.login(emailRef.current.value, passwordRef.current.value);
   };
   return (
     <form className="login-container" onSubmit={handleSubmit}>

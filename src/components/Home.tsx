@@ -1,11 +1,19 @@
 import twitterLogo from '../images/twitter-logo.png';
 import homeLogo from '../images/home-logo.png';
 import { firebaseConfig } from '../firebase-config.js';
+import { UserContext } from '../App';
 import Post from './Post';
+import { useContext } from 'react';
 
 type Props = {};
 
 const Home = (props: Props) => {
+  const currentUser = useContext(UserContext);
+  console.log('This is current user from context', currentUser);
+  console.log(UserContext.displayName);
+  console.log(UserContext.Provider);
+  console.log(UserContext.Consumer);
+
   return (
     <div className="home-container">
       <div className="home-left-navigation">
@@ -53,6 +61,7 @@ const Home = (props: Props) => {
             href="https://github.com/Faroukhamadi"
             target="_blank"
             className="github-link"
+            rel="noreferrer"
           >
             {' '}
             <span>Farouk Hamadi.</span>
