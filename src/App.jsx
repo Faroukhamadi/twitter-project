@@ -2,7 +2,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/SignUp';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -58,17 +58,21 @@ const App = () => {
       });
   };
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // console.log('Here user is logged in');
-      // setCurrentUser(user.uid);
-      // console.log('This is after user logged in', user.uid);
-      // console.log(isLoggedIn);
-      // console.log('current user state test', currentUser);
-    } else {
-      // console.log('Here user fucked up');
-    }
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser({ name: user.displayName, email: user.email });
+        console.log('were at auth state changed');
+        // console.log('Here user is logged in');
+        // setCurrentUser(user.uid);
+        // console.log('This is after user logged in', user.uid);
+        // console.log(isLoggedIn);
+        // console.log('current user state test', currentUser);
+      } else {
+        // console.log('Here user fucked up');
+      }
+    });
+  }, []);
 
   return (
     <UserContext.Provider value={currentUser}>

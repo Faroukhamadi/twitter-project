@@ -11,11 +11,15 @@ const SignUp = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    props.signup(
-      emailRef.current.value,
-      passwordRef.current.value,
-      nameRef.current.value
-    );
+    try {
+      await props.signup(
+        emailRef.current.value,
+        passwordRef.current.value,
+        nameRef.current.value
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

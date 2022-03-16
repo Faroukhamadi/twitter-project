@@ -9,10 +9,12 @@ type Props = {};
 
 const Home = (props: Props) => {
   const currentUser = useContext(UserContext);
-  console.log('This is current user from context', currentUser);
-  console.log(UserContext.displayName);
-  console.log(UserContext.Provider);
-  console.log(UserContext.Consumer);
+
+  console.log('This is the current user: ', currentUser);
+
+  // console.log(UserContext.displayName);
+  // console.log(UserContext.Provider);
+  // console.log(UserContext.Consumer);
 
   return (
     <div className="home-container">
