@@ -1,6 +1,7 @@
 import twitterLogo from '../images/twitter-logo.png';
 import homeLogo from '../images/home-logo.png';
 import { firebaseConfig } from '../firebase-config.js';
+import Post from './Post';
 
 type Props = {};
 
@@ -15,12 +16,22 @@ const Home = (props: Props) => {
         <button className="home-tweet-button">Tweet</button>
       </div>
       <div className="home-posts">
-        <div className="search-bar-container">
-          <input
-            type="text"
-            className="home-posts-search"
-            placeholder="Search Posts"
-          />
+        <div className="home-posts-container">
+          <div className="search-bar-container">
+            <input
+              type="text"
+              className="home-posts-search"
+              placeholder="Search Posts"
+            />
+          </div>
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
         </div>
       </div>
       <div className="home-right-navigation">
@@ -29,6 +40,24 @@ const Home = (props: Props) => {
           className="home-search"
           placeholder="Search Twitter"
         />
+        <div className="home-signup">
+          <p className="p1">New to Twitter?</p>
+          <p className="p2">
+            Sign up to get your own personalized <br /> timeline!
+          </p>
+          <button className="home-signup-button">Sign up</button>
+        </div>
+        <p>
+          This is a project by
+          <a
+            href="https://github.com/Faroukhamadi"
+            target="_blank"
+            className="github-link"
+          >
+            {' '}
+            <span>Farouk Hamadi.</span>
+          </a>
+        </p>
       </div>
     </div>
   );
