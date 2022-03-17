@@ -236,7 +236,8 @@ input::placeholder {
   font-family: Roboto;
 }
 
-.home-signup {
+.home-signup,
+.home-signout {
   border: 1px solid rgba(0, 0, 0, 0.08);
   width: 25vw;
   display: flex;
@@ -247,7 +248,8 @@ input::placeholder {
   border-radius: 30px;
 }
 
-.home-signup-button {
+.home-signup-button,
+.home-signout-button {
   background-color: #1da1f2;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
   border-radius: 100px;
@@ -264,7 +266,8 @@ input::placeholder {
   opacity: 0.9;
 }
 
-.p1 {
+.p1,
+.p3 {
   font-family: 'Roboto';
   font-size: larger;
   font-weight: 900;
@@ -348,7 +351,10 @@ input::placeholder {
   margin-top: 10px;
 }
 
-/* 
-post-info-header
-post-info-text
-post-info-reactions */
+.p3 {
+  margin-left: 20px;
+}
+
+.user-name {
+  color: #1da1f2;
+}

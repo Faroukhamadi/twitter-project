@@ -1,12 +1,14 @@
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/SignUp';
+import SignOut from './components/SignOut';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, createContext, useEffect } from 'react';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from 'firebase/auth';
 import { auth } from './firebase-config';
@@ -16,7 +18,6 @@ export const UserContext = createContext(null);
 const App = () => {
   const [hasAccount, setHasAccount] = useState(false);
   const [isWrongPassword, setisWrongPassword] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
   const signup = (email, password, name) => {
@@ -25,7 +26,7 @@ const App = () => {
         updateProfile(auth.currentUser, {
           displayName: name,
         }).then(() => {
-          console.log('profile updated');
+          console.log('name added');
         });
         // setCurrentUser(userCredential.user);
         // userCredential.setHasAccount(false);
@@ -41,11 +42,6 @@ const App = () => {
   const login = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // setCurrentUser({ email, password });
-        // setIsLoggedIn(true);
-        // setisWrongPassword(true);
-        // console.log({ email, password });
-        // console.log(currentUser);
         console.log('operation type', userCredential.operationType);
         console.log('provider id', userCredential.providerId);
         console.log('user', userCredential.user.email);
@@ -58,18 +54,26 @@ const App = () => {
       });
   };
 
+  const signout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log('sign-out successful');
+      })
+      .catch((error) => {
+        console.error(error, 'happened');
+      });
+  };
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser({ name: user.displayName, email: user.email });
         console.log('were at auth state changed');
-        // console.log('Here user is logged in');
-        // setCurrentUser(user.uid);
-        // console.log('This is after user logged in', user.uid);
-        // console.log(isLoggedIn);
-        // console.log('current user state test', currentUser);
       } else {
-        // console.log('Here user fucked up');
+        setCurrentUser({});
+        console.log(
+          'Here user fucked up, i think it means that he s not signed in'
+        );
       }
     });
   }, []);
@@ -78,7 +82,11 @@ const App = () => {
     <UserContext.Provider value={currentUser}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route
+            path="/"
+            element={<Home signout={signout} currentUser={currentUser} />}
+          ></Route>
+          <Route path="signout" element={<SignOut />}></Route>
           <Route path="login" element={<Login login={login} />}></Route>
           <Route
             path="signup"

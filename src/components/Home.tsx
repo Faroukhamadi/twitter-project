@@ -4,17 +4,19 @@ import { firebaseConfig } from '../firebase-config.js';
 import { UserContext } from '../App';
 import Post from './Post';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-type Props = {};
+type Props = {
+  currentUser: any;
+  signout: () => void;
+};
 
 const Home = (props: Props) => {
+  const navigate = useNavigate();
+
   const currentUser = useContext(UserContext);
 
   console.log('This is the current user: ', currentUser);
-
-  // console.log(UserContext.displayName);
-  // console.log(UserContext.Provider);
-  // console.log(UserContext.Consumer);
 
   return (
     <div className="home-container">
@@ -50,13 +52,38 @@ const Home = (props: Props) => {
           className="home-search"
           placeholder="Search Twitter"
         />
-        <div className="home-signup">
-          <p className="p1">New to Twitter?</p>
-          <p className="p2">
-            Sign up to get your own personalized <br /> timeline!
-          </p>
-          <button className="home-signup-button">Sign up</button>
-        </div>
+        {Object.keys(props.currentUser).length === 0 ? (
+          <div className="home-signup">
+            <p className="p1">New to Twitter?</p>
+            <p className="p2">
+              Sign up to get your own personalized <br /> timeline!
+            </p>
+            <button
+              className="home-signup-button"
+              onClick={() => {
+                navigate('/signup', { replace: true });
+              }}
+            >
+              Sign up
+            </button>
+          </div>
+        ) : (
+          <div className="home-signout">
+            <p className="p3">
+              Want to Sign Out of Twitter{' '}
+              <span className="user-name">{props.currentUser.name}</span> ?
+            </p>
+            <button
+              className="home-signout-button"
+              onClick={() => {
+                props.signout();
+                navigate('/signout', { replace: true });
+              }}
+            >
+              Sign out
+            </button>
+          </div>
+        )}
         <p>
           This is a project by
           <a
