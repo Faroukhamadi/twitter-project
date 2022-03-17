@@ -15,6 +15,7 @@ import {
   setDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase-config';
+import uniqid from 'uniqid';
 
 const Home = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -83,6 +84,7 @@ const Home = (props) => {
           {!isLoading &&
             posts.map((post) => (
               <Post
+                key={uniqid()}
                 userName={post.userName}
                 userAt={post.userAt}
                 text={post.text}
