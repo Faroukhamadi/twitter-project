@@ -5,7 +5,7 @@ import { ReactComponent as Retweet } from '../images/retweet.svg';
 import { ReactComponent as Like } from '../images/like.svg';
 import { ReactComponent as Upload } from '../images/Upload.svg';
 
-const Post = () => {
+const Post = (props) => {
   return (
     <div className="post-container">
       <div className="post-img-container">
@@ -14,16 +14,16 @@ const Post = () => {
       <div className="post-info">
         <div className="post-info-header">
           <p>
-            <span className="name">Farouk</span>{' '}
-            <span className="at">@Farouk</span>{' '}
-            <span className="date">Sun Jan 04 2022</span>
+            <span className="name">{props.userName}</span>{' '}
+            <span className="at">@{props.userAt}</span>{' '}
+            <span className="date">{props.date}</span>
           </p>
           <div className="svg-container">
             <Dots className="dots" alt="dots" />
           </div>
         </div>
         <div className="post-info-text">
-          <p>Hello there homie.</p>
+          <p>{props.text}</p>
         </div>
         <div className="post-info-reactions">
           <div className="svg-container">

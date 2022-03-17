@@ -1,9 +1,10 @@
+// IMPORTANT: Might need this later to write data
 import twitterLogo from '../images/twitter-logo.png';
 import homeLogo from '../images/home-logo.png';
 import { firebaseConfig } from '../firebase-config.js';
 import { UserContext } from '../App';
 import Post from './Post';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   collection,
@@ -16,43 +17,45 @@ import {
 import { db } from '../firebase-config';
 
 const Home = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log('Hellooooooooooooooo');
-    // IMPORTANT: Might need this later to write data
-    // const postsRef = collection(db, 'posts');
+
+    const postsRef = collection(db, 'posts');
 
     // const writeData = async () => {
-    //   await setDoc(doc(postsRef, 'post1'), {
+    //   await setDoc(doc(postsRef, 'post5'), {
     //     commentCount: 0,
     //     date: 'Sun Jan 04 2022',
     //     likeCount: 0,
     //     retweetCount: 0,
-    //     text: 'Second Post',
-    //     userAt: 'Farouk22',
-    //     userName: 'Farouk',
+    //     text: 'Fourth Post',
+    //     userAt: 'ALIA2234',
+    //     userName: 'alia',
     //   });
     // };
-
     const fetchData = async () => {
       const q = query(collection(db, 'posts'));
-
+      const tempArr = [];
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, ' => ', doc.data());
+        tempArr.push(doc.data());
       });
+      setPosts(tempArr);
+      setIsLoading(false);
     };
-    // IMPORTANT: might need this later to write data
     // writeData();
-
     fetchData();
   }, []);
 
   const currentUser = useContext(UserContext);
-
   console.log('This is the current user: ', currentUser);
+  console.log('this is the posts array', posts);
+  console.log('Is it loading ?', isLoading);
 
   return (
     <div className="home-container">
@@ -77,14 +80,15 @@ const Home = (props) => {
               placeholder="Search Posts"
             />
           </div>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {!isLoading &&
+            posts.map((post) => (
+              <Post
+                userName={post.userName}
+                userAt={post.userAt}
+                text={post.text}
+                date={post.date}
+              />
+            ))}
         </div>
       </div>
       <div className="home-right-navigation">
