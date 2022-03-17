@@ -3,12 +3,22 @@ import { ReactComponent as Comment } from '../images/comment.svg';
 import { ReactComponent as Retweet } from '../images/retweet.svg';
 import { ReactComponent as Like } from '../images/like.svg';
 import { ReactComponent as Upload } from '../images/Upload.svg';
-import { storage } from '../firebase-config.js';
+import { db, storage } from '../firebase-config.js';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
+import { collection, doc, updateDoc } from 'firebase/firestore';
 
 const Post = (props) => {
   const [image, setImage] = useState();
+
+  const handleLike = async () => {
+    const docRef = doc(db, 'posts', props.id);
+    await updateDoc(docRef, {
+      likeCount: props.likeCount + 1,
+    });
+    props.toggleUpdate();
+  };
+
   useEffect(() => {
     const emptyReference = ref(
       storage,
@@ -27,6 +37,10 @@ const Post = (props) => {
       storage,
       'gs://twitter-project-a2bb5.appspot.com/nardine.jpg'
     );
+    const jackieReference = ref(
+      storage,
+      'gs://twitter-project-a2bb5.appspot.com/jackie.jpg'
+    );
 
     let referenceToLookFor = '';
     switch (props.userName.toLowerCase()) {
@@ -38,6 +52,9 @@ const Post = (props) => {
         break;
       case 'nardine':
         referenceToLookFor = nardineReference;
+        break;
+      case 'jackie':
+        referenceToLookFor = jackieReference;
         break;
       default:
         referenceToLookFor = emptyReference;
@@ -74,12 +91,15 @@ const Post = (props) => {
         <div className="post-info-reactions">
           <div className="svg-container">
             <Comment className="comment" alt="comment" />
+            <span className="count-span">{props.commentCount}</span>
           </div>
           <div className="svg-container">
             <Retweet className="retweet" alt="retweet" />
+            <span className="count-span">{props.retweetCount}</span>
           </div>
           <div className="svg-container">
-            <Like className="like" alt="like" />
+            <Like className="like" alt="like" onClick={handleLike} />
+            <span className="count-span">{props.likeCount}</span>
           </div>
           <div className="svg-container">
             <Upload className="upload" alt="upload" />

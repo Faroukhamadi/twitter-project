@@ -20,43 +20,30 @@ import uniqid from 'uniqid';
 const Home = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [update, setUpdate] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log('Hellooooooooooooooo');
+  const toggleUpdate = () => {
+    setUpdate(!update);
+  };
 
+  useEffect(() => {
     const postsRef = collection(db, 'posts');
 
-    // const writeData = async () => {
-    //   await setDoc(doc(postsRef, 'post5'), {
-    //     commentCount: 0,
-    //     date: 'Sun Jan 04 2022',
-    //     likeCount: 0,
-    //     retweetCount: 0,
-    //     text: 'Fourth Post',
-    //     userAt: 'ALIA2234',
-    //     userName: 'alia',
-    //   });
-    // };
     const fetchData = async () => {
       const q = query(collection(db, 'posts'));
       const tempArr = [];
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data());
-        tempArr.push(doc.data());
+        tempArr.push({ ...doc.data(), id: doc.id });
       });
       setPosts(tempArr);
       setIsLoading(false);
     };
-    // writeData();
     fetchData();
-  }, []);
+  }, [update]);
 
   const currentUser = useContext(UserContext);
-  console.log('This is the current user: ', currentUser);
-  console.log('this is the posts array', posts);
-  console.log('Is it loading ?', isLoading);
 
   return (
     <div className="home-container">
@@ -89,6 +76,11 @@ const Home = (props) => {
                 userAt={post.userAt}
                 text={post.text}
                 date={post.date}
+                commentCount={post.commentCount}
+                likeCount={post.likeCount}
+                retweetCount={post.retweetCount}
+                id={post.id}
+                toggleUpdate={toggleUpdate}
               />
             ))}
         </div>

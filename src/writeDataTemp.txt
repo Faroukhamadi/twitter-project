@@ -1,0 +1,11 @@
+    // const writeData = async () => {
+    //   await setDoc(doc(postsRef, 'post5'), {
+    //     commentCount: 0,
+    //     date: 'Sun Jan 04 2022',
+    //     likeCount: 0,
+    //     retweetCount: 0,
+    //     text: 'Fourth Post',
+    //     userAt: 'ALIA2234',
+    //     userName: 'alia',
+    //   });
+    // };

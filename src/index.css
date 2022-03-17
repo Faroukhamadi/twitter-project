@@ -361,5 +361,6 @@ input::placeholder {
   color: #1da1f2;
 }
 
-/* IMPORTANT: copy props of class */
-/* login-password-reset */
+.count-span {
+  margin-left: 4px;
+}
