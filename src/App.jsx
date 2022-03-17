@@ -28,11 +28,8 @@ const App = () => {
         }).then(() => {
           console.log('name added');
         });
-        // setCurrentUser(userCredential.user);
-        // userCredential.setHasAccount(false);
       })
       .catch((error) => {
-        // if user already has an account
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
           setHasAccount(true);
         }

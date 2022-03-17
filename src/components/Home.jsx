@@ -3,16 +3,52 @@ import homeLogo from '../images/home-logo.png';
 import { firebaseConfig } from '../firebase-config.js';
 import { UserContext } from '../App';
 import Post from './Post';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+} from 'firebase/firestore';
+import { db } from '../firebase-config';
 
-type Props = {
-  currentUser: any;
-  signout: () => void;
-};
-
-const Home = (props: Props) => {
+const Home = (props) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('Hellooooooooooooooo');
+    // IMPORTANT: Might need this later to write data
+    // const postsRef = collection(db, 'posts');
+
+    // const writeData = async () => {
+    //   await setDoc(doc(postsRef, 'post1'), {
+    //     commentCount: 0,
+    //     date: 'Sun Jan 04 2022',
+    //     likeCount: 0,
+    //     retweetCount: 0,
+    //     text: 'Second Post',
+    //     userAt: 'Farouk22',
+    //     userName: 'Farouk',
+    //   });
+    // };
+
+    const fetchData = async () => {
+      const q = query(collection(db, 'posts'));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, ' => ', doc.data());
+      });
+    };
+    // IMPORTANT: might need this later to write data
+    // writeData();
+
+    fetchData();
+  }, []);
 
   const currentUser = useContext(UserContext);
 
@@ -25,7 +61,12 @@ const Home = (props: Props) => {
         <button className="home-home-button">
           <img src={homeLogo} alt="home" />
         </button>
-        <button className="home-tweet-button">Tweet</button>
+        <button
+          onClick={() => navigate('/', { replace: true })}
+          className="home-tweet-button"
+        >
+          Tweet
+        </button>
       </div>
       <div className="home-posts">
         <div className="home-posts-container">

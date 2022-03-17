@@ -2,13 +2,14 @@ import { useRef, useState, useContext } from 'react';
 import twitterLogo from '../images/twitter-logo.png';
 import { UserContext } from '../App';
 import { Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = (props) => {
+  const navigate = useNavigate();
+
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { email, password } = useContext(UserContext);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -47,9 +48,15 @@ const SignUp = (props) => {
       <button className="signup-button" type="submit">
         Sign Up
       </button>
+      <p
+        onClick={() => navigate('/login', { replace: true })}
+        className="link-to-login"
+      >
+        Already Have An Account?Login Here
+      </p>
       {props.hasAccount && (
         <Alert variant="danger">
-          <Alert.Heading>Account already exists</Alert.Heading>
+          <Alert.Heading>Account already exists. Try Again</Alert.Heading>
         </Alert>
       )}
     </form>

@@ -1,10 +1,4 @@
 import portrait from '../images/portrait.png';
-// import dots from '../images/dots.svg';
-// import comment from '../images/comment.svg';
-// import retweet from '../images/retweet.svg';
-// import like from '../images/like.svg';
-// import upload from '../images/Upload.svg';
-
 import { ReactComponent as Dots } from '../images/dots.svg';
 import { ReactComponent as Comment } from '../images/comment.svg';
 import { ReactComponent as Retweet } from '../images/retweet.svg';
